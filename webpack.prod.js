@@ -1,6 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
 const HtmlWebPackPlugin = require("html-webpack-plugin")
+const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 
 module.exports = {
     entry: './src/client/index.js',
@@ -21,11 +22,17 @@ module.exports = {
                 exclude: /node_modules/,
                 loader: "babel-loader"
             },
+            // sass can't have quotes!
+            // {
+            //     test: /\.scss$/,
+            //     // chained loaders (run from right to left) <===
+            //     use: ['style-loader', 'css-loader', 'sass-loader']
+            //     //         3rd             2nd            1st
+            // },
             {
+                // extract css into its own file, instead of in-line as above
                 test: /\.scss$/,
-                // chained loaders (run from right to left) <===
-                use: ['style-loader', 'css-loader', 'sass-loader']
-                //         3rd             2nd            1st
+                use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
             },
         ]
     },
@@ -33,6 +40,9 @@ module.exports = {
         new HtmlWebPackPlugin({
             template: "./src/client/views/index.html",
             filename: "./index.html",
-        })
+        }),
+        new MiniCssExtractPlugin({
+            filename: "[name].css"
+        }),
     ]
 }

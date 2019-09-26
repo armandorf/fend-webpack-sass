@@ -24,6 +24,7 @@ module.exports = {
                 exclude: /node_modules/,
                 loader: "babel-loader"
             },
+            // sass can't have quotes!
             {
                 test: /\.scss$/,
                 // chained loaders (run from right to left) <===
