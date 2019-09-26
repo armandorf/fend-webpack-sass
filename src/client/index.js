@@ -12,3 +12,9 @@ console.log(checkForName);
 // alert("I EXIST")
 console.log("I EXIST");
 console.log("CHANGE!!");
+
+// exporting these files to the Client library
+export {
+    checkForName,
+    handleSubmit
+}
